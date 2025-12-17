@@ -19,6 +19,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import logo from "../../assets/logo/logo.png";
 
 const NAV_ITEMS = [
   { label: "Home", href: "#hero" },
@@ -68,18 +69,53 @@ export default function Navbar({ progress = 1 }) {
       >
         <Toolbar disableGutters sx={{ minHeight: 64 }}>
           {/* Brand */}
-          <Typography
-            variant="h6"
+          <Box
+            onClick={() => handleNavClick("#hero")}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") handleNavClick("#hero");
+            }}
             sx={{
-              fontWeight: 700,
-              letterSpacing: 4,
-              textTransform: "uppercase",
-              color: "common.white",
-              fontSize: { xs: 12, sm: 13 },
+              display: "flex",
+              alignItems: "center",
+              gap: 1.25,
+              cursor: "pointer",
+              borderRadius: 1,
+              outline: "none",
+              "&:focus-visible": {
+                outline: "3px solid rgba(255,255,255,0.35)",
+                outlineOffset: 2,
+              },
             }}
           >
-            YOGA with COLLEEN
-          </Typography>
+            <Box
+              component="img"
+              src={logo}
+              alt="Yoga with Colleen logo"
+              sx={{
+                height: { xs: 36, sm: 38 },
+                width: "auto",
+                display: "block",
+              }}
+            />
+            {!isMobile && (
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  letterSpacing: 4,
+                  textTransform: "uppercase",
+                  color: "common.white",
+                  fontSize: { xs: 12, sm: 13 },
+                  lineHeight: 1,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                YOGA with COLLEEN
+              </Typography>
+            )}
+          </Box>
 
           <Box sx={{ flexGrow: 1 }} />
 

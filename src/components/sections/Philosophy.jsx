@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import { Box, Container, Typography, Stack } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 import philosophy1 from "../../assets/philosophy/philosophy1.webp";
@@ -9,6 +11,8 @@ const MotionTypography = motion(Typography);
 
 export default function YogaPhilosophySection() {
   const sectionRef = useRef(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   // Scroll progress for this section (0 -> 1)
   const { scrollYProgress } = useScroll({
@@ -17,8 +21,8 @@ export default function YogaPhilosophySection() {
   });
 
   // Card/container effect: grows as you scroll
-  const cardScale = useTransform(scrollYProgress, [0, 0.25], [0.7, 1]);
-  const cardRadius = useTransform(scrollYProgress, [0, 0.25], [32, 0]);
+  const cardScaleDesktop = useTransform(scrollYProgress, [0, 0.25], [0.7, 1]);
+  const cardRadiusDesktop = useTransform(scrollYProgress, [0, 0.25], [32, 0]);
 
   // Dark overlay opacity so text gets clearer as you scroll
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.3], [0.2, 0.7]);
@@ -43,6 +47,7 @@ export default function YogaPhilosophySection() {
       ref={sectionRef}
       sx={{
         position: "relative",
+        bgcolor: "background.default",
         // This makes the section taller than the viewport so the user
         // can scroll "through" the animation before moving on
         height: "400vh",
@@ -51,8 +56,8 @@ export default function YogaPhilosophySection() {
       {/* Sticky full-screen container that animates while scrolling */}
       <MotionBox
         style={{
-          scale: cardScale,
-          borderRadius: cardRadius,
+          scale: isMobile ? 1 : cardScaleDesktop,
+          borderRadius: isMobile ? 0 : cardRadiusDesktop,
         }}
         sx={{
           position: "sticky",

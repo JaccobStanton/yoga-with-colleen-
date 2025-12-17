@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import {
   Box,
   Container,
@@ -8,14 +8,13 @@ import {
   Grid,
   Dialog,
 } from "@mui/material";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import about1 from "../../assets/about/about1.webp";
 import about2 from "../../assets/about/about2.webp";
 import about3 from "../../assets/about/about3.webp";
 
 const MotionGrid = motion(Grid);
 const MotionTypography = motion(Typography);
-const MotionBox = motion(Box);
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 28 },
@@ -31,33 +30,27 @@ const fadeUp = (delay = 0) => ({
   viewport: { once: true, amount: 0.3 },
 });
 
-function FadeInImage({ src, alt, delay = 0, onClick }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.35 });
-
+function FadeInImage({ src, alt, onClick }) {
   return (
-    <MotionBox
-      ref={ref}
+    <Box
       component="img"
       src={src}
       alt={alt}
       onClick={onClick}
-      initial={{ opacity: 0, y: 16 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-      transition={{
-        duration: 0.6,
-        delay,
-        ease: [0.25, 0.1, 0.25, 1],
-      }}
       sx={{
         width: "100%",
         aspectRatio: "4 / 3",
         objectFit: "cover",
         borderRadius: "var(--radius)",
         cursor: "pointer",
-        transition: "0.3s",
         boxShadow: "0 16px 40px rgba(15,23,42,0.25)",
-        "&:hover": { opacity: 0.85 },
+        transition:
+          "transform 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease",
+        "&:hover": {
+          opacity: 0.9,
+          transform: "translateY(-2px)",
+          boxShadow: "0 18px 45px rgba(15,23,42,0.28)",
+        },
       }}
     />
   );
@@ -123,7 +116,6 @@ export default function AboutColleenSection() {
                     src={src}
                     alt={`Colleen yoga ${index + 1}`}
                     onClick={() => handleOpen(src)}
-                    delay={0.1 * index}
                   />
                 ))}
               </Box>

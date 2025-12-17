@@ -1,4 +1,21 @@
 import { Box, Container, Typography } from "@mui/material";
+import { motion } from "framer-motion";
+
+const MotionTypography = motion(Typography);
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.25, 0.1, 0.25, 1],
+      delay,
+    },
+  },
+  viewport: { once: true, amount: 0.35 },
+});
 
 export function NamasteBanner() {
   return (
@@ -34,18 +51,19 @@ export function NamasteBanner() {
             gap: 1.5,
           }}
         >
-          <Typography
+          <MotionTypography
             variant="h3"
             sx={{
               textTransform: "lowercase",
               letterSpacing: 4,
               fontWeight: 800,
             }}
+            {...fadeUp(0)}
           >
             namasté
-          </Typography>
+          </MotionTypography>
 
-          <Typography
+          <MotionTypography
             variant="subtitle2"
             sx={{
               fontStyle: "italic",
@@ -53,17 +71,19 @@ export function NamasteBanner() {
               color: "text.secondary",
               mb: { xs: 1, md: 2 },
             }}
+            {...fadeUp(0.1)}
           >
             (nah-mas-tay)
-          </Typography>
+          </MotionTypography>
 
-          <Typography
+          <MotionTypography
             variant="body1"
             sx={{
               color: "text.primary",
               lineHeight: 1.8,
               fontSize: { xs: 16, sm: 18, md: 20 },
             }}
+            {...fadeUp(0.2)}
           >
             "My soul honors your soul. I honor the place in you where the entire
             universe resides. I honor the light, love, truth, beauty &amp; peace
@@ -80,7 +100,7 @@ export function NamasteBanner() {
               we are one"
             </Box>
             .
-          </Typography>
+          </MotionTypography>
         </Container>
       </Box>
     </section>

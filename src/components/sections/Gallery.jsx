@@ -12,7 +12,6 @@ import hero1 from "../../assets/hero/hero1.webp";
 import philosophy1 from "../../assets/philosophy/philosophy1.webp";
 import about1 from "../../assets/about/about1.webp";
 import about2 from "../../assets/about/about2.webp";
-import about3 from "../../assets/about/about3.webp";
 import about4 from "../../assets/about/about4.webp";
 import teach1 from "../../assets/teaching/teach1.webp";
 import teach2 from "../../assets/teaching/teach2.webp";
@@ -22,7 +21,6 @@ import gallery1 from "../../assets/gallery/1.webp";
 import gallery2 from "../../assets/gallery/2.webp";
 import gallery3 from "../../assets/gallery/3.webp";
 import gallery4 from "../../assets/gallery/4.webp";
-import gallery5 from "../../assets/gallery/5.webp";
 import gallery6 from "../../assets/gallery/6.webp";
 import gallery7 from "../../assets/gallery/7.webp";
 import galleryBeach from "../../assets/gallery/beach.webp";
@@ -264,9 +262,8 @@ export function GallerySection() {
               color="text.secondary"
               sx={{ maxWidth: 760 }}
             >
-              Light-filled moments from recent classes and private sessions.
-              Every image is optimized (WebP, lazy-loaded, and fit to its frame)
-              so you can browse smoothly on any device.
+              Visual moments featuring your instructor and the environments that
+              shape the practice.
             </Typography>
           </Stack>
 
@@ -334,10 +331,19 @@ export function GallerySection() {
                       "linear-gradient(to right, rgba(32,142,56,0.18), transparent)",
                     display: "flex",
                     alignItems: "flex-end",
+                    justifyContent: "center",
                     p: { xs: 1.5, sm: 2 },
                   }}
                 >
-                  <Stack spacing={0.5} sx={{ color: "common.white" }}>
+                  <Stack
+                    spacing={0.5}
+                    sx={{
+                      color: "common.white",
+                      textAlign: "center",
+                      alignItems: "center",
+                      width: "100%",
+                    }}
+                  >
                     <Typography
                       variant="subtitle1"
                       sx={{ fontWeight: 700, letterSpacing: 0.2 }}

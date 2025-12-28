@@ -2,11 +2,29 @@ import * as React from "react";
 import { Box, Container, Grid, Typography, Paper } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { motion } from "framer-motion";
 
 import teach1 from "../../assets/teaching/teach1.webp";
 import teach2 from "../../assets/teaching/teach2.webp";
 import teach3 from "../../assets/teaching/teach3.webp";
 import teach4 from "../../assets/teaching/teach4.webp";
+
+const MotionGrid = motion(Grid);
+const MotionTypography = motion(Typography);
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.25, 0.1, 0.25, 1],
+      delay,
+    },
+  },
+  viewport: { once: true, amount: 0.3 },
+});
 
 export default function TeachingApproachSection() {
   const theme = useTheme();
@@ -55,24 +73,25 @@ export default function TeachingApproachSection() {
         <Container maxWidth="lg">
           <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
             {/* LEFT: copy */}
-            <Grid item xs={12} md={6}>
-              <Typography
+            <MotionGrid item xs={12} md={6} {...fadeUp(0.15)}>
+              <MotionTypography
                 variant="overline"
                 sx={{ letterSpacing: 4, color: "primary.main" }}
+                {...fadeUp(0.2)}
               >
                 Teaching approach
-              </Typography>
-              <Typography variant="h3" sx={{ mt: 1.5, mb: 2 }}>
+              </MotionTypography>
+              <MotionTypography variant="h3" sx={{ mt: 1.5, mb: 2 }} {...fadeUp(0.3)}>
                 Welcoming, grounding, empowering
-              </Typography>
-              <Typography variant="body1" color="text.secondary">
+              </MotionTypography>
+              <MotionTypography variant="body1" color="text.secondary" {...fadeUp(0.4)}>
                 My goal is to offer yoga that feels welcoming, grounding, and
                 empowering. Whether you&apos;re building strength, improving
                 mobility, seeking calm, or beginning your yoga journey for the
                 first time, I&apos;m here to guide you with thoughtful
                 sequencing, breath awareness, and a supportive atmosphere.
-              </Typography>
-            </Grid>
+              </MotionTypography>
+            </MotionGrid>
 
             {/* RIGHT: blocks + hover image (image only on desktop) */}
             <Grid item xs={12} md={6}>
@@ -118,7 +137,7 @@ export default function TeachingApproachSection() {
                             }),
                           }}
                         >
-                          <Typography
+                          <MotionTypography
                             variant="subtitle2"
                             sx={{
                               mb: 1,
@@ -126,12 +145,17 @@ export default function TeachingApproachSection() {
                               letterSpacing: 2,
                               fontWeight: 600,
                             }}
+                            {...fadeUp(0.2 + index * 0.08)}
                           >
                             {area.label}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
+                          </MotionTypography>
+                          <MotionTypography
+                            variant="body2"
+                            color="text.secondary"
+                            {...fadeUp(0.3 + index * 0.08)}
+                          >
                             {area.description}
-                          </Typography>
+                          </MotionTypography>
                         </Paper>
                       </Grid>
                     ))}

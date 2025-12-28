@@ -7,6 +7,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { motion } from "framer-motion";
 import CloseIcon from "@mui/icons-material/Close";
 import hero1 from "../../assets/hero/hero1.webp";
 import philosophy1 from "../../assets/philosophy/philosophy1.webp";
@@ -27,6 +28,24 @@ import galleryBeach from "../../assets/gallery/beach.webp";
 import galleryForest from "../../assets/gallery/forest.webp";
 import galleryMountains from "../../assets/gallery/mountains.webp";
 import galleryStream from "../../assets/gallery/stream.webp";
+
+const MotionBox = motion(Box);
+const MotionChip = motion(Chip);
+const MotionTypography = motion(Typography);
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.25, 0.1, 0.25, 1],
+      delay,
+    },
+  },
+  viewport: { once: true, amount: 0.3 },
+});
 
 const galleryItems = [
   {
@@ -242,7 +261,7 @@ export function GallerySection() {
             alignItems="flex-start"
             sx={{ mb: { xs: 4, md: 6 } }}
           >
-            <Chip
+            <MotionChip
               label="Gallery"
               sx={{
                 textTransform: "uppercase",
@@ -251,20 +270,22 @@ export function GallerySection() {
                 bgcolor: "rgba(32,142,56,0.08)",
                 borderRadius: "999px",
               }}
+              {...fadeUp(0.15)}
             />
 
-            <Typography variant="h3" sx={{ maxWidth: 720 }}>
+            <MotionTypography variant="h3" sx={{ maxWidth: 720 }} {...fadeUp(0.25)}>
               A calm, bright studio vibe—captured in motion.
-            </Typography>
+            </MotionTypography>
 
-            <Typography
+            <MotionTypography
               variant="body1"
               color="text.secondary"
               sx={{ maxWidth: 760 }}
+              {...fadeUp(0.35)}
             >
               Visual moments featuring your instructor and the environments that
               shape the practice.
-            </Typography>
+            </MotionTypography>
           </Stack>
 
           <Box
@@ -279,11 +300,12 @@ export function GallerySection() {
             }}
           >
             {galleryItems.map((item, idx) => (
-              <Box
+              <MotionBox
                 key={item.alt + idx}
                 component="button"
                 type="button"
                 onClick={() => setActiveItem(item)}
+                {...fadeUp(0.15 + idx * 0.03)}
                 sx={{
                   border: "none",
                   padding: 0,
@@ -344,21 +366,23 @@ export function GallerySection() {
                       width: "100%",
                     }}
                   >
-                    <Typography
+                    <MotionTypography
                       variant="subtitle1"
                       sx={{ fontWeight: 700, letterSpacing: 0.2 }}
+                      {...fadeUp(0.2)}
                     >
                       {item.label}
-                    </Typography>
-                    <Typography
+                    </MotionTypography>
+                    <MotionTypography
                       variant="body2"
                       sx={{ color: "rgba(255,255,255,0.86)", maxWidth: 360 }}
+                      {...fadeUp(0.3)}
                     >
                       {item.context}
-                    </Typography>
+                    </MotionTypography>
                   </Stack>
                 </Box>
-              </Box>
+              </MotionBox>
             ))}
           </Box>
         </Container>
@@ -415,7 +439,7 @@ export function GallerySection() {
                 src={activeItem.src}
                 alt={activeItem.alt}
                 onClick={(e) => e.stopPropagation()}
-                loading="eager"
+                loading="lazy"
                 sx={{
                   width: "100%",
                   maxHeight: "82vh",

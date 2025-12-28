@@ -1,5 +1,23 @@
 import { Box, Container, Grid, Typography, Paper, Chip } from "@mui/material";
+import { motion } from "framer-motion";
 import gallery4 from "../../assets/gallery/4.webp";
+
+const MotionTypography = motion(Typography);
+const MotionChip = motion(Chip);
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.25, 0.1, 0.25, 1],
+      delay,
+    },
+  },
+  viewport: { once: true, amount: 0.3 },
+});
 
 export default function YogaOfferingsSection() {
   const offerings = [
@@ -35,20 +53,21 @@ export default function YogaOfferingsSection() {
           <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
             {/* LEFT: copy (match TeachingApproach layout) */}
             <Grid item xs={12} md={6}>
-              <Typography
+              <MotionTypography
                 variant="overline"
                 sx={{ letterSpacing: 4, color: "primary.main" }}
+                {...fadeUp(0.1)}
               >
                 Yoga with Colleen
-              </Typography>
-              <Typography variant="h3" sx={{ mt: 1.5, mb: 2 }}>
+              </MotionTypography>
+              <MotionTypography variant="h3" sx={{ mt: 1.5, mb: 2 }} {...fadeUp(0.2)}>
                 Accessible yoga for every body
-              </Typography>
-              <Typography variant="body1" color="text.secondary">
+              </MotionTypography>
+              <MotionTypography variant="body1" color="text.secondary" {...fadeUp(0.3)}>
                 My teaching blends a few core styles so you can find the right
                 pace for your body—whether you want steady foundations, a warm
                 challenge, or a gentler flow.
-              </Typography>
+              </MotionTypography>
             </Grid>
 
             {/* RIGHT: image + cards (flipped vs TeachingApproach: image left, cards right) */}
@@ -88,7 +107,7 @@ export default function YogaOfferingsSection() {
                 {/* Cards */}
                 <Box sx={{ flex: 1 }}>
                   <Grid container spacing={2.5}>
-                    {offerings.map((offering) => (
+                    {offerings.map((offering, index) => (
                       <Grid key={offering.title} item xs={12}>
                         <Paper
                           elevation={0}
@@ -120,7 +139,7 @@ export default function YogaOfferingsSection() {
                             },
                           }}
                         >
-                          <Chip
+                          <MotionChip
                             label={offering.title}
                             size="small"
                             sx={{
@@ -130,10 +149,15 @@ export default function YogaOfferingsSection() {
                               letterSpacing: 1.5,
                               textTransform: "uppercase",
                             }}
+                            {...fadeUp(0.15 + index * 0.1)}
                           />
-                          <Typography variant="body2" color="text.secondary">
+                          <MotionTypography
+                            variant="body2"
+                            color="text.secondary"
+                            {...fadeUp(0.25 + index * 0.1)}
+                          >
                             {offering.description}
-                          </Typography>
+                          </MotionTypography>
                         </Paper>
                       </Grid>
                     ))}

@@ -83,6 +83,9 @@ export default function Navbar({ progress = 1 }) {
               cursor: "pointer",
               borderRadius: 1,
               outline: "none",
+              transform: `translateY(${(1 - navProgress) * 20}px)`,
+              opacity: navProgress,
+              transition: "opacity 0.2s ease, transform 0.2s ease",
               "&:focus-visible": {
                 outline: "3px solid rgba(255,255,255,0.35)",
                 outlineOffset: 2,

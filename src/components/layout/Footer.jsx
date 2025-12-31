@@ -300,7 +300,14 @@ export default function Footer() {
             fontSize: 14,
           }}
         >
-          Stanton Studios - Web Design
+          <Link
+            href="mailto:jaccobstanton@gmail.com?subject=Website%20Inquiry"
+            underline="hover"
+            color="inherit"
+            sx={{ fontSize: 14 }}
+          >
+            Stanton Studios - Web Design
+          </Link>
         </Typography>
       </Container>
     </Box>
